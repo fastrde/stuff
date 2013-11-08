@@ -2,6 +2,33 @@ Stuff
 =====
 usefull scripts/thoughts etc
 
+ripple_phonegap3.patch (diff - patch File)
+----------------------
+- Download latest ripple version 
+
+```
+git clone https://git-wip-us.apache.org/repos/asf/incubator-ripple.git
+```
+
+- Download ripple_phonegap3.patch
+- Copy ripple_phonegap3.patch in your ripple directory
+- run ```patch -p1 < ripple_phonegap3.patch```
+- run ```./configure``` to configure ripple (possibly you need sudo/root privileges)
+- run ```jake```
+
+To test it create a new phonegap hello world application, change in the new app directory and run ripple
+(in my case it's located in /tmp/incubator-ripple)
+
+```
+phonegap create testRipple
+cd testRipple
+/tmp/incubator-ripple/bin/ripple emulate
+```
+
+now you should see "Device is Ready" in the emulator.
+
+ 
+
 setup_tileserver_ubuntu12.04lts.sh
 ----------------------------------
 This file downloads and sets up a complete tileserver.

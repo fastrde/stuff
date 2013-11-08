@@ -1,0 +1,36 @@
+diff -rupN ripple/lib/server/emulate/cordovaProject.js ripple_updated/lib/server/emulate/cordovaProject.js
+--- ripple/lib/server/emulate/cordovaProject.js	2013-11-08 13:51:45.120848198 +0100
++++ ripple_updated/lib/server/emulate/cordovaProject.js	2013-11-08 14:10:35.876851554 +0100
+@@ -55,6 +55,7 @@ module.exports = {
+             }
+ 
+             req.staticSource = pth;
++            req.cordova = opts.cordova;
+             next();
+         };
+     }
+diff -rupN ripple/lib/server/emulate/hosted.js ripple_updated/lib/server/emulate/hosted.js
+--- ripple/lib/server/emulate/hosted.js	2013-11-08 13:51:45.120848198 +0100
++++ ripple_updated/lib/server/emulate/hosted.js	2013-11-08 14:10:19.348851506 +0100
+@@ -30,7 +30,10 @@ var fs = require('fs'),
+ 
+     BOOTSTRAP_FROM_IFRAME = 'if (window.top.ripple) { ' +
+                                 'window.top.ripple("bootstrap").inject(window, document);' +
+-                            '}';
++                            '}',
++
++    PG3_SCRIPTTAG_OLD= /<script type="text\/javascript" src="phonegap.js"><\/script>/,
++    PG3_SCRIPTTAG_NEW= '<script type="text/javascript" src="cordova.js"></script>';
+ 
+ // TODO: Put this and xhr_proxy into common file (epic DRY..)?
+ function proxyRemote(opts, req, res) {
+@@ -134,6 +137,9 @@ function localInjection() {
+                             BOOTSTRAP_FROM_IFRAME +
+                         '</script>');
+ 
++            if (req.cordova){
++              doc = doc.replace(PG3_SCRIPTTAG_OLD, PG3_SCRIPTTAG_NEW);
++            }
+             res.send(doc);
+         });
+     }
