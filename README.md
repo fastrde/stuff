@@ -10,14 +10,14 @@ ripple_phonegap3.patch (diff - patch File)
 git clone https://git-wip-us.apache.org/repos/asf/incubator-ripple.git
 ```
 
-- Download ripple_phonegap3.patch
-- Copy ripple_phonegap3.patch in your ripple directory
+- Download ```ripple_phonegap3.patch```
+- Copy ```ripple_phonegap3.patch``` in your ripple directory
 - run ```patch -p1 < ripple_phonegap3.patch```
 - run ```./configure``` to configure ripple (possibly you need sudo/root privileges)
 - run ```jake```
 
 To test it create a new phonegap hello world application, change in the new app directory and run ripple
-(in my case it's located in /tmp/incubator-ripple)
+(in my case it's located in ```/tmp/incubator-ripple```)
 
 ```
 phonegap create testRipple
